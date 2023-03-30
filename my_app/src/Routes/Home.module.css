@@ -1,0 +1,16 @@
+.view_all_btn {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  width: 477px;
+}
+.product_cards {
+  width: 76%;
+  /* border: 1px solid; */
+  display: grid;
+  gap:20px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: auto;
+  
+}
