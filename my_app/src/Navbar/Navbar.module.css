@@ -1,0 +1,20 @@
+.main{
+    border: 1px solid;
+    /* height: 150px; */
+    padding: 8px;
+}
+.nav_top{
+    display: flex;
+    height: 30%;
+    justify-content: space-between;
+    
+}
+.nav_bot{
+    background-color: #ffd91c;
+    height: 50px;
+}
+
+
+
+
+  
