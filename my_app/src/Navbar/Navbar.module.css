@@ -2,6 +2,7 @@
     border: 1px solid;
     /* height: 150px; */
     padding: 8px;
+    /* position: fixed; */
 }
 .nav_top{
     display: flex;

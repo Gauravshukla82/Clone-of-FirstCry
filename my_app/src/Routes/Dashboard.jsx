@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import ProductsTable from "../Components/ProductsTable";
+import ProductsContainer from "../Components/ProductsContainer";
 
 
 function Dashboard() {
@@ -8,16 +8,16 @@ function Dashboard() {
   return (
     <div>
       <h3>Dashboard</h3>
-      <div>
+      {/* <div>
         <button data-testid="logout-btn">Logout</button>
         <p>
           Token:{token}
           <b data-testid="user-token"></b>
         </p>
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      </div> */}
+      <div>
         {/* Products table */}
-        <ProductsTable />
+        <ProductsContainer />
       </div>
     </div>
   );

@@ -1,7 +1,18 @@
 import babyCare from "../babyCare.png";
 import style from "./Navbar.module.css";
-import { Input, InputRightAddon, InputGroup } from "@chakra-ui/react";
+import {
+  Input,
+  InputRightAddon,
+  InputGroup,
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionIcon,
+  Box,
+  AccordionPanel,
+} from "@chakra-ui/react";
 import { BsCartCheck } from "react-icons/bs";
+import Category from "./Category";
 export default function Navbar() {
   return (
     <div className={style.main}>
@@ -27,7 +38,26 @@ export default function Navbar() {
         </div>
       </div>
       <div className={style.nav_bot}>
-        
+        {/* Category here */}
+        <Accordion allowToggle>
+          <AccordionItem>
+            <h2>
+              <AccordionButton
+                _expanded={{ bg: "tomato", color: "white" }}
+                w="200px" 
+                marginLeft="100px"
+              >
+                <Box as="span" flex="1">
+                  All Category
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Category />
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
   );
