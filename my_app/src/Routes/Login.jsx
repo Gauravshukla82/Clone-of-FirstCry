@@ -1,12 +1,33 @@
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import React from "react"
 import { AuthContext } from "../Context/AuthContext";
+import {
+  Modal,
+  Button,
+  FormControl,
+  FormLabel,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Input,
+} from '@chakra-ui/react'
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isAuth } = useContext(AuthContext);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const initialRef = React.useRef(null)
+  const finalRef = React.useRef(null)
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -35,50 +56,58 @@ function Login() {
   }
 
   return (
-    <div>
-      <form data-testid="login-form">
-        <div>
-          <label>
-            Email
-            <input
-              data-testid="email-input"
+   
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+      <Button ml={4} ref={finalRef}>
+        I'll receive focus on close
+      </Button>
+
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Login</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input ref={initialRef} 
               type="email"
               placeholder="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 console.log(email);
-              }}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input
-              type="password"
-              data-testid="password-input"
+              }}/>
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Password</FormLabel>
+              <Input type="password"
+              
               placeholder="Enter Password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-              }}
-            />
-          </label>
-        </div>
-        <div>
-          <input
-            data-testid="form-submit"
-            type="submit"
-            value="SUBMIT"
-            onSubmit={handleLogin}
-          />
-        </div>
-      </form>
-      <div>
-        <Link to="/">Go Back</Link>
-      </div>
-    </div>
-  );
+              }}/>
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
 }
+
 export default Login;

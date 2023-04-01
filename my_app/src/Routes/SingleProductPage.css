@@ -1,0 +1,42 @@
+.product_page_container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.product_left_container{
+    width: 38%;
+    border: 1px solid;
+    text-align: center;
+    position: sticky;
+    top: 0px;
+    
+}
+.product_right_container{
+    width: 50%;
+    border: 1px solid rgb(218, 211, 211);
+    
+}
+
+
+.add_to_cart{
+    border: 1px solid;
+    width: 200px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    background-color:#ff8528;
+    margin-right: 20px;
+    color: white;
+    font-weight: 800;
+}
+.cut_rate{
+    font-size: 20px;
+    text-decoration: line-through;
+    margin-right: 15px;
+}
+.offer_onPrice{
+    font-size: 18px;
+    color: #E53935;
+    margin-right: 15px;
+}
