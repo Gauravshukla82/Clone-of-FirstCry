@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "./ProductsContainer.module.css";
+
+
 export default function ProductCard({
   id,
   image,
@@ -13,7 +15,9 @@ export default function ProductCard({
 }) {
   return (
     <div className={style.product_card}>
+      <Link to={`/products/${id}`}>
       <img src={image} alt="" />
+      </Link>
       <button className={style.add_cart}>Add to cart</button>
       
       <p

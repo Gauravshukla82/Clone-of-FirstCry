@@ -22,6 +22,7 @@ function ProductsContainer() {
       <div className={style.product_container}>
         
         {
+          
           data?.map((el) =>  ( <ProductCard {...el} />))
         }
       </div>

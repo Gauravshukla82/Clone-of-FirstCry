@@ -1,5 +1,6 @@
 import babyCare from "../babyCare.png";
 import style from "./Navbar.module.css";
+import {Link} from "react-router-dom"
 import {
   Input,
   InputRightAddon,
@@ -13,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { BsCartCheck } from "react-icons/bs";
 import Category from "./Category";
+
 export default function Navbar() {
   return (
     <div className={style.main}>
@@ -31,7 +33,9 @@ export default function Navbar() {
         </div>
         <div style={{ display: "flex", margin: "5px" }}>
           <p>Support |</p>
+          <Link to="/login">
           <p>Login/Register |</p>
+          </Link>
           <p>Shortlist |</p>
           <BsCartCheck />
           <p>Cart |</p>
@@ -40,14 +44,14 @@ export default function Navbar() {
       <div className={style.nav_bot}>
         {/* Category here */}
         <Accordion allowToggle>
-          <AccordionItem>
+          <AccordionItem border="none">
             <h2>
               <AccordionButton
                 _expanded={{ bg: "tomato", color: "white" }}
-                w="200px" 
+                w="200px"
                 marginLeft="100px"
               >
-                <Box as="span" flex="1">
+                <Box as="span" flex="1" padding="5px" fontWeight="bold">
                   All Category
                 </Box>
                 <AccordionIcon />
