@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import style from "./ProductsContainer.module.css";
+import { useState } from "react";
 
 
 export default function ProductCard({
@@ -13,12 +14,21 @@ export default function ProductCard({
   L12_42,
   M12_42,size,
 }) {
+
+  const [inCart, setInCart] = useState(false);
+
+  const handleClick = () => {
+    setInCart(!inCart);
+  }
+
+  
+  
   return (
     <div className={style.product_card}>
       <Link to={`/products/${id}`}>
       <img src={image} alt="" />
       </Link>
-      <button className={style.add_cart}>Add to cart</button>
+      <button className={style.add_cart}  onClick={handleClick}>{inCart?"Go To Cart":"Add To Cart"}</button>
       
       <p
         style={{

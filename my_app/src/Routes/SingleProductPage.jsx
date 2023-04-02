@@ -1,19 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./SingleProductPage.css";
 import club from "./club.png";
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
 
 function SingleProductPage({}) {
   const [data, setData] = React.useState([]);
+  
   const { id } = useParams();
+  const [inCart, setInCart] = useState(false);
+  const [inWishList, setInWishList] = useState(false);
+  const { isAuth, loginUser, logoutUser, token, handleSearch, searchData,handleAddClick, cart } =
+  useContext(AuthContext);
 
   React.useEffect(() => {
-    axios.get(`http://localhost:8080/products?id=${id}`).then((response) => {
+    window.scrollTo(0, 0);
+    axios.get(`https://powerful-blue-smock.cyclic.app/products?id=${id}`).then((response) => {
       setData(response.data);
-      console.log(response);
+      // console.log(response);
     });
   }, [id]);
+
+  let cartItem = JSON.parse(localStorage.getItem('cartItem')) || [];
+  // console.log(cartItem);
+  const handleAddClick1 = () => {
+    // let cartData = {
+    //   image: data[0]?.image,
+    //   title: data[0]?.title,
+    //   price: data[0]?.r1,
+    //   quantity:1,
+    // }
+    
+    // setCart(cartData)
+    // setInCart(!inCart);
+    handleAddClick(data)
+
+  
+
+    
+  }
+  const handleWishClick = () => {
+    setInWishList(!inWishList);
+  }
+
 
   return (
     <div className="product_page_container">
@@ -24,12 +55,15 @@ function SingleProductPage({}) {
           alt=""
         />
         <div>
-          <button className="add_to_cart">ADD TO CART</button>
+          <Link to="./signup">
+          <button className="add_to_cart" disabled={inCart==true} onClick={handleAddClick1}>{inCart ?"GO TO CART" :"ADD TO CART"}</button>
+          </Link>
           <button
             className="add_to_cart"
             style={{ background: "white", color: "black" }}
+            onClick={handleWishClick}
           >
-            WISHLIST
+            {inWishList?"ADDED TO WISHLIST":"WISHLIST"}
           </button>
         </div>
       </div>

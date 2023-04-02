@@ -14,26 +14,51 @@ import {
 } from "@chakra-ui/react";
 import { BsCartCheck } from "react-icons/bs";
 import Category from "./Category";
+import { useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const {isAuth, loginUser, logoutUser, token,handleSearch,searchData}=useContext(AuthContext);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  }
+  const handleClick = () => {
+    handleSearch(search)
+    navigate("/dashboard");
+  }
+
+
+ 
+ 
+ 
+ 
   return (
     <div className={style.main}>
       <div className={style.nav_top}>
+        <Link to="/">
         <img width={200} src={babyCare} alt="" />
+        </Link>
         <div style={{ margin: "5px" }}>
           <InputGroup>
             <Input
               w={400}
               h={8}
               type="text"
+              onChange={handleChange}
               placeholder="Search for a Category, Brand or Product"
             />
-            <InputRightAddon h={8} children="Search" />
+            <InputRightAddon onClick={handleClick} h={8} children="Search" />
           </InputGroup>
         </div>
         <div style={{ display: "flex", margin: "5px" }}>
           <p>Support |</p>
-          <Link to="/login">
+          <Link to="/signup">
           <p>Login/Register |</p>
           </Link>
           <p>Shortlist |</p>
