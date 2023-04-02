@@ -1,113 +1,98 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import React from "react"
+import React from "react";
 import { AuthContext } from "../Context/AuthContext";
 import {
-  Modal,
-  Button,
+  Flex,
+  Box,
   FormControl,
   FormLabel,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   Input,
-} from '@chakra-ui/react'
-
+  Checkbox,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Link,
+  useToast,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { login, isAuth } = useContext(AuthContext);
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate();
 
-  const initialRef = React.useRef(null)
-  const finalRef = React.useRef(null)
+  const toast = useToast();
 
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const userDetails = {
-      email,
-      password,
-    };
-
-    fetch("https://reqres.in/api/login", {
-      method: "POST",
-      body: JSON.stringify(userDetails),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.token);
-        login(json.token);
-      });
-  };
-
-  // redirect to desired page after login
-  if (isAuth) {
-    return <Navigate to="/dashboard" />;
+  function handleClick() {
+    return toast({
+      title: "Account created.",
+      description: "We've created your account for you.",
+      status: "success",
+      duration: 5000,
+      position: "top",
+      isClosable: true,
+    });
+    navigate("/");
   }
 
   return (
-   
-    <>
-      <Button onClick={onOpen}>Open Modal</Button>
-      <Button ml={4} ref={finalRef}>
-        I'll receive focus on close
-      </Button>
-
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Login</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Input ref={initialRef} 
-              type="email"
-              placeholder="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                console.log(email);
-              }}/>
+    <Flex
+      minH={"80vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+          <Text fontSize={"lg"} color={"gray.600"}>
+            to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
+          </Text>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <FormControl id="email">
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" />
             </FormControl>
-
-            <FormControl mt={4}>
+            <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password"
-              
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}/>
+              <Input type="password" />
             </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  )
+            <Stack spacing={10}>
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                align={"start"}
+                justify={"space-between"}
+              >
+                <Checkbox>Remember me</Checkbox>
+                <Link color={"blue.400"}>Forgot password?</Link>
+              </Stack>
+              <Link href="/booking" style={{textDecoration:"none"}}>
+                <Button
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                  onClick={handleClick}
+                >
+                  Sign in
+                </Button>
+              </Link>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
+  );
 }
 
 export default Login;

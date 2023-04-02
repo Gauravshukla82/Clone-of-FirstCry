@@ -7,7 +7,7 @@ function Dashboard() {
   const { token,isAuth,logout} = useContext(AuthContext)
   return (
     <div>
-      <h3>Dashboard</h3>
+      {/* <h3>Dashboard</h3> */}
       {/* <div>
         <button data-testid="logout-btn">Logout</button>
         <p>
@@ -15,7 +15,7 @@ function Dashboard() {
           <b data-testid="user-token"></b>
         </p>
       </div> */}
-      <div>
+      <div style={{marginTop:"30px"}}>
         {/* Products table */}
         <ProductsContainer />
       </div>
